@@ -1,0 +1,9 @@
+{
+  "timestamp" : 1519080058949,
+  "status" : 400,
+  "error" : "Bad Request",
+  "exception" : "org.springframework.http.converter.HttpMessageNotReadableException",
+  "message" : "Required request body is missing: public org.springframework.http.ResponseEntity<?> com.detrans.security.controller.AuthenticationRestController.createAuthenticationToken(com.detrans.security.JwtAuthenticationRequest,org.springframework.mobile.device.Device) throws org.springframework.security.core.AuthenticationException",
+  "path" : "/auth"
+}--_curl_--"username": "admin"
+--_curl_-- "password": "admin"
