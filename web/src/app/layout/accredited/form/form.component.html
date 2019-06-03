@@ -1,0 +1,252 @@
+<div [@routerTransition]>
+  <h2 class="text-muted">
+    <small>{{title}} credenciado</small>
+    <div class="pull-right" [@routerTransition]>
+      <button class="btn btn-md btn-secondary" (click)="cancel()" type="button">Cancelar</button>
+      <button class="btn btn-md btn-success" (click)="onSubmit(accredited);" type="submit">Salvar</button>
+
+    </div>
+  </h2>
+  <hr>
+
+  <img src="assets/images/Logo2.PNG" id="imgLogo" width="200px" class="pull-right " />
+</div>
+
+<ngb-tabset>
+  <ngb-tab title="Formulário">
+    <ng-template ngbTabContent>
+      <div class="row col-md-12" [@routerTransition]>
+        <form (ngSubmit)="onSubmit(f.value)" [formGroup]="form" class="row form-horizontal col-md-12">
+          <div class="col-md-12 row" *ngIf="onEdit">
+            <div class="col-md-12 form-align">
+              <label>
+                <strong>Selecione o tipo do cadastro</strong>
+              </label>
+              <select class="form-control col-md-4" #selectedCategory (click)="handleFormTypes(selectedCategory.value)">
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <div [ngClass]="displayFieldCss('name')">
+              <label *ngIf="elder" class="control-label required">
+                <strong>Nome do idoso</strong>
+              </label>
+              <label *ngIf="pregnant" class="control-label required">
+                <strong>Nome da gestante</strong>
+              </label>
+              <label *ngIf="deficient" class="control-label required">
+                <strong>Nome do portador de deficiência</strong>
+              </label>
+              <label *ngIf="children" class="control-label required">
+                <strong>Nome da criança</strong>
+              </label>
+
+              <input type="text" class="form-control" id="name" name="name" formControlName="name">
+
+              <error-display [displayError]="isFieldValid('name')" errorMsg="Nome é um campo obrigatório!">
+              </error-display>
+
+            </div>
+          </div>
+
+
+          <div class="col-md-2 form-align">
+            <label>
+              <strong>Sexo</strong>
+            </label>
+            <select class="form-control" id="gender" required formControlName="genderEnum">
+              <option value="{{ genderString.MASCULINO }}">Masculino</option>
+              <option value="{{ genderString.FEMININO }}">Feminino</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 form-align form-group">
+            <label>
+              <strong>Data de Nascimento:</strong>
+            </label>
+            <div class="form-group datepickersize">
+              <div class="input-group">
+                <form [formGroup]="form" [ngClass]="displayFieldCss('birth_date')">
+                  <date-picker [showClearButton]="false" formControlName="birth_date" format="DD/MM/YYYY"></date-picker>
+                  <error-display [displayError]="isFieldValid('birth_date')" errorMsg="Data de nascimento é um campo obrigatório!">
+                  </error-display>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="children" class="col-md-6 form-group">
+            <label>
+              <strong>Nome do pai</strong>
+            </label>
+            <input type="text" class="form-control" id="fathername" name="fathername" formControlName="fathername">
+          </div>
+
+          <div *ngIf="children" class="col-md-5">
+            <label>
+              <strong>CNH Pai</strong>
+            </label>
+            <input class="form-control" type="text" id="fathercnh" formControlName="fathercnh">
+          </div>
+
+          <div *ngIf="children" class="col-md-6">
+            <label>
+              <strong>Nome da mãe</strong>
+            </label>
+            <input type="text" class="form-control" id="mothername" name="mothername" formControlName="mothername">
+          </div>
+
+          <div *ngIf="children" class="col-md-5">
+            <label>
+              <strong>CNH Mãe</strong>
+            </label>
+            <input class="form-control" type="text" id="mothercnh" formControlName="mothercnh">
+          </div>
+
+          <div *ngIf="pregnant" class="col-md-3 form-align">
+            <label>
+              <strong>Previsão do parto:</strong>
+            </label>
+            <date-picker [showClearButton]="false" formControlName="childbirth" format="DD/MM/YYYY">
+            </date-picker>
+          </div>
+
+          <div class="col-md-3 form-align">
+            <div [ngClass]="displayFieldCss('rg')">
+              <label>
+                <strong>RG</strong>
+              </label>
+              <input class="form-control" type="text" id="rg" formControlName="rg">
+              <error-display [displayError]="isFieldValid('rg')" errorMsg="RG é um campo obrigatório!"></error-display>
+            </div>
+          </div>
+
+          <div class="col-md-4 form-align">
+            <label>
+              <strong>Registro CNH</strong>
+            </label>
+            <input class="form-control" type="text" id="cnh" formControlName="cnh">
+          </div>
+
+          <div class="col-md-4 form-align">
+            <div [ngClass]="displayFieldCss('cpf')">
+              <label>
+                <strong>CPF</strong>
+              </label>
+              <input class="form-control" type="text" formControlName="cpf">
+              <error-display [displayError]="isFieldValid('cpf')" errorMsg="CPF é um campo obrigatório!"></error-display>
+            </div>
+          </div>
+
+
+          <div class="col-md-4 form-align">
+            <div [ngClass]="displayFieldCss('city')">
+              <label>
+                <strong>Cidade</strong>
+              </label>
+              <input class="form-control" type="text" id="city" formControlName="city">
+              <error-display [displayError]="isFieldValid('city')" errorMsg="Cidade é um campo obrigatório!"></error-display>
+            </div>
+          </div>
+
+          <div class="col-md-7 form-align">
+            <div [ngClass]="displayFieldCss('address')">
+              <label>
+                <strong>Endereço</strong>
+              </label>
+              <input class="form-control" type="text" formControlName="address">
+              <error-display [displayError]="isFieldValid('address')" errorMsg="Endereço é um campo obrigatório!"></error-display>
+            </div>
+          </div>
+
+          <div class="col-md-4 form-align">
+            <div [ngClass]="displayFieldCss('neighborhood')">
+              <label>
+                <strong>Bairro</strong>
+              </label>
+              <input class="form-control" type="text" id="neighborhood" formControlName="neighborhood">
+              <error-display [displayError]="isFieldValid('neighborhood')" errorMsg="Bairro é um campo obrigatório!"></error-display>
+            </div>
+          </div>
+
+          <div class="col-md-4 form-align">
+            <label>
+              <strong>Telefone Residencial</strong>
+            </label>
+            <input class="form-control" type="text" formControlName="residential_phone">
+          </div>
+
+          <div class="col-md-4 form-align">
+            <label>
+              <strong>Celular</strong>
+            </label>
+            <input class="form-control" type="text" id="celphone" formControlName="cel_phone">
+          </div>
+
+          <div *ngIf="pregnant" class="col-md-6 form-align">
+            <label>
+              <strong>E-mail</strong>
+            </label>
+            <input class="form-control" type="text" id="email" formControlName="email">
+          </div>
+
+          <div *ngIf="!onEdit" class="col-md-2 form-align">
+            <label>
+              <strong>Status</strong>
+            </label>
+            <select class="form-control" required formControlName="statusEnum">
+              <option value="ATIVO">Ativo</option>
+              <option value="INATIVO">Inativo</option>
+            </select>
+          </div>
+
+          <div class="col-md-12 form-align card-aligner" *ngIf="elder || deficient">
+            <ngb-accordion #acc="ngbAccordion">
+              <ngb-panel id="toggle-1" title="Possui representante?">
+                <ng-template ngbPanelContent>
+                  <div class="col-md-4 form-align">
+                    <label>
+                      <strong>Nome representante</strong>
+                    </label>
+                    <input class="form-control" id="namerep" name="namerep" formControlName="namerep">
+                  </div>
+                  <div class="col-md-3 form-align">
+                    <label>
+                      <strong>Telefone</strong>
+                    </label>
+                    <input class="form-control" id="phonerep" name="phonerep" formControlName="phonerep">
+                  </div>
+
+                  <div class="col-md-3 form-align">
+                    <label>
+                      <strong>RG</strong>
+                    </label>
+                    <input class="form-control" id="rgrep" name="rgrep" formControlName="rgrep">
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="comment">
+              <strong>Observações:</strong>
+            </label>
+            <textarea class="form-control" rows="5" id="comment" formControlName="comment"></textarea>
+          </div>
+
+        </form>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template *ngIf="accredited" ngbTabTitle>
+      <b>Documentos</b>
+    </ng-template>
+    <ng-template ngbTabContent>
+      <file-upload [accredited]="accredited"></file-upload>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

@@ -1,0 +1,40 @@
+<div class="form-group">
+    <div class="input-group search-group"
+        [ngClass]="{
+            'filled': page?.search.pattern,
+            'invert-search': page?.layout.invertSearch
+        }">
+
+        <!-- Search -->
+        <ng-container>
+            <input
+                class="form-control search-input mainpt"
+                placeholder="Buscar"
+                (keyup.enter)="onSearchClicked(search)"
+                [(ngModel)]="page?.search.pattern"
+                #search>
+            <!-- Clear button -->
+            <div class="fs-cursor-pointer input-group-addon search-clear"
+                (click)="search.value = ''; onSearchClicked(search)">
+                <span class="fluigicon fluigicon-remove-circle fluigicon-xs"></span>
+            </div>
+            <!-- Submit button -->
+            <div class="fs-cursor-pointer input-group-addon search-submit"
+                (click)="onSearchClicked(search)">
+                <i class="material-icons">search</i>
+            </div>
+            <div *ngIf="page?.limits.length"
+                class="input-group-addon search-limit-wrapper">
+                <select class="search-limit"
+                    (change)="setLimit($event.target.value)">
+                    <option *ngFor="let limit of page?.limits"
+                        [selected]="limit === this.page.limit"
+                        [value]="limit">
+                        {{ limit }}
+                    </option>
+                </select>
+            </div>
+        </ng-container>
+
+    </div>
+</div>

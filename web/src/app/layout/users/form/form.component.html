@@ -1,0 +1,77 @@
+<div [@routerTransition]>
+  <h2 class="text-muted">
+    <small>Cadastro de usuários</small>
+    <div class="pull-right" [@routerTransition]>
+      <button class="btn btn-md btn-secondary" (click)="cancel()" type="button">Cancelar</button>
+      <button class="btn btn-md btn-success" (click)="onSubmit();" type="submit">Salvar</button>
+    </div>
+  </h2>
+  <hr>
+  <img src="assets/images/Logo2.PNG" id="imgLogo" width="200px" class="pull-right " />
+</div>
+
+<div [@routerTransition]>
+  <form (ngSubmit)="onSubmit(f.value)" [formGroup]="userForm" class="row col-md-12 form-align">
+    <div [ngClass]="displayFieldCss('name')" class="col-md-6 form-separator">
+      <label>
+        <strong>Nome</strong>
+      </label>
+
+      <input type="text" class="form-control" name="name" formControlName="name">
+
+      <error-display [displayError]="isFieldValid('name')" errorMsg="Nome é um campo obrigatório!">
+      </error-display>
+    </div>
+
+    <div [ngClass]="displayFieldCss('username')" *ngIf="!user" class="col-md-6 form-separator">
+      <label>
+        <strong>Usuário</strong>
+      </label>
+      <input type="text" class="form-control" name="user" formControlName="username">
+      <error-display [displayError]="isFieldValid('username')" errorMsg="Usuário é um campo obrigatório!">
+      </error-display>
+    </div>
+
+    <div [ngClass]="displayFieldCss('password')" class="col-md-6 form-separator">
+      <label>
+        <strong>Senha</strong>
+      </label>
+
+      <input type="password" minlength=5 class="form-control" name="password" formControlName="password">
+
+      <error-display [displayError]="isFieldValid('password')" errorMsg="Senha é um campo obrigatório e com no minímo 5 caracteres!">
+      </error-display>
+
+    </div>
+
+    <div *ngIf="user_id" class="col-md-6 form-separator">
+      <label>
+        <strong>Confirme a senha</strong>
+      </label>
+      <input type="password" class="form-control" name="passwordConfirm" formControlName="passwordConfirm">
+    </div>
+
+    <div [ngClass]="displayFieldCss('email')" class="col-md-6 form-separator">
+      <label>
+        <strong>E-mail</strong>
+      </label>
+      <input type="text" class="form-control" name="email" [email]="true" formControlName="email">
+      <error-display [displayError]="isFieldValid('email')" errorMsg="Favor inserir um e-mail valido"></error-display>
+    </div>
+
+    <div class="col-md-2" [ngClass]="displayFieldCss('admin')">
+      <label>
+        <strong>Administrador</strong>
+      </label>
+      <select class="form-control" required formControlName="admin">
+        <option value="true">Sim</option>
+        <option value="false" selected>Não</option>
+      </select>
+
+      <error-display [displayError]="isFieldValid('admin')" errorMsg="Defina se usuário é administrador ou não"></error-display>
+
+    </div>
+
+
+  </form>
+</div>

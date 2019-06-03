@@ -1,0 +1,71 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a routerLink="/layout/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-bar-chart"></i>&nbsp;{{ 'Dashboard' }}
+        </a>
+        <a routerLink="/layout/users" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-address-card-o"></i>&nbsp;{{ 'Cadastros'}}
+        </a>
+        <a routerLink="/layout/accredited/lista" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-address-book"></i>&nbsp;{{ 'Credenciados'}}
+        </a>
+    </ul>
+</nav>
+        <!--<div class="nested-menu">-->
+            <!--<a class="list-group-item" (click)="addExpandClass('pages')">-->
+                <!--<span><i class="fa fa-plus"></i>&nbsp; {{ 'Sistema 1' | translate }}</span>-->
+            <!--</a>-->
+            <!--<li class="nested" [class.expand]="showMenu === 'pages'">-->
+                <!--<ul class="submenu">-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</div>-->
+
+        <!--<div class="nested-menu">-->
+            <!--<a class="list-group-item" (click)="addExpandClass('pages')">-->
+                <!--<span><i class="fa fa-plus"></i>&nbsp; {{ 'Sistema 2' | translate }}</span>-->
+            <!--</a>-->
+            <!--<li class="nested" [class.expand]="showMenu === 'pages'">-->
+                <!--<ul class="submenu">-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</div>-->
+
+        <!--<div class="nested-menu">-->
+            <!--<a class="list-group-item" (click)="addExpandClass('pages')">-->
+                <!--<span><i class="fa fa-plus"></i>&nbsp; {{ 'Sistema 3' | translate }}</span>-->
+            <!--</a>-->
+            <!--<li class="nested" [class.expand]="showMenu === 'pages'">-->
+                <!--<ul class="submenu">-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</div>-->
+    <!--</ul>-->
+

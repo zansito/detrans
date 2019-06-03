@@ -1,0 +1,24 @@
+<app-modal [size]="action?.prompt.size" #modal>
+    <div class="app-modal-header text-center">
+        {{ action?.prompt.title }}
+    </div>
+    <div class="app-modal-body"
+        *ngIf="action?.prompt.message.value.length || action?.prompt.answer">
+        <p *ngIf="action?.prompt.message.value.length">{{ action?.prompt.message }}</p>
+        <div [hidden]="!action?.prompt.answer" class="form-group">
+            <textarea class="form-control" [(ngModel)]="answerField"></textarea>
+        </div>
+    </div>
+    <div class="app-modal-footer text-center">
+        <button type="button"x
+            class="btn btn-primary btn-sm"
+            (click)="onModalConfirm(answerField)">
+              Confirmar
+        </button>
+        <button type="button"
+            class="btn btn-default btn-sm"
+            (click)="onModalCancel()">
+             Cancelar
+        </button>
+    </div>
+</app-modal>

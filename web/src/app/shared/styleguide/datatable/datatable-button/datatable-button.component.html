@@ -1,0 +1,65 @@
+<ng-container *ngIf="!button.children.length && !parent">
+    <ng-container *ngTemplateOutlet="single"></ng-container>
+</ng-container>
+
+<ng-container *ngIf="button.children.length">
+    <ng-container *ngTemplateOutlet="dropdown"></ng-container>
+</ng-container>
+
+<ng-container *ngIf="parent">
+    <ng-container *ngTemplateOutlet="child"></ng-container>
+</ng-container>
+
+<ng-template #single>
+    <a class="btn btn-default {{ button.clazz }}"
+        title="{{ button.label }}"
+        [class.disabled]="disableButton(button)"
+        [hidden]="hideButton(button)"
+        [style.visibility]="visibilityButton(button)">
+        <span [ngClass]="setButtonIcon(button)">
+        {{ button.icon ? '' : button.label }}
+        </span>
+    </a>
+</ng-template>
+
+<ng-template #child>
+    <a title="{{ button.label }}"
+        class="dropdown-child"
+        [class.disabled]="disableButton(button)"
+        [hidden]="hideButton(button)"
+        [style.visibility]="visibilityButton(button)">
+        <span class="fluigicon-xs"
+            [ngClass]="setButtonIcon(button)"></span>
+        <span class="icon-label">{{ button.label }}</span>
+    </a>
+</ng-template>
+
+<ng-template #dropdown>
+    <div class="input-group-btn">
+        <div class="dropdown">
+            <button
+                type="button"
+                class="btn btn-default {{ button.clazz }} dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="true"
+                [class.disabled]="disableButton(button)"
+                [hidden]="hideButton(button)"
+                [style.visibility]="visibilityButton(button)">
+                {{ button.label }}
+                    <span class="caret"></span>
+            </button>
+            <ul *ngIf="!disableButton(button)"  class="dropdown-menu">
+                <ng-container *ngFor="let child of button.children">
+                    <li>
+                        <app-datatable-button
+                            [parent]="button"
+                            [button]="child"
+                            (onReaction)="onProxyReaction($event)"
+                            (onPrompt)="onProxyPrompt($event)"></app-datatable-button>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</ng-template>

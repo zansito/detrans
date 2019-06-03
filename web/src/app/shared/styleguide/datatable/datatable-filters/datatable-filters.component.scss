@@ -1,0 +1,65 @@
+.filterby-addon {
+  background: transparent;
+  border: none;
+  font-size: 0.8em;
+  font-weight: bold;
+  opacity: 0.8;
+  line-height: 0.8em;
+  color: white;
+}
+
+.input-group-btn {
+
+  .btn {
+    margin: 0;
+    border: none;
+    background: transparent;
+    color: white;
+  }
+}
+
+.option-check {
+
+  float: right;
+  line-height: 1.5em;
+}
+
+.option-label {
+
+  margin-right: 20px;
+}
+
+.dropdown-menu {
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color:black;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.padding-li {
+  padding: 5pxz;
+}
+
+a {
+  color: grey;
+}
+
+.li-remove
+{
+list-style-type: none;
+}
+
+.datable-filters {
+  margin-top: 35px;
+}

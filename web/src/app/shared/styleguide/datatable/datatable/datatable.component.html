@@ -1,0 +1,134 @@
+<div class="row header colored-top" [hidden]="isDisabled()">
+
+    <ng-container *ngFor="let headerEl of page?.layout.header">
+
+        <!-- Search -->
+        <ng-container *ngIf="headerEl.element === layoutOrderEnum.SEARCH">
+            <div class="col-md-{{ headerEl.size }} datatable-search">
+                <app-datatable-search
+                    [page]="page"
+                    (onSearch)="setPage($event)">
+                  </app-datatable-search>
+            </div>
+        </ng-container>
+
+        <!--Filters  -->
+        <ng-container *ngIf="headerEl.element === layoutOrderEnum.FILTERS">
+            <span class="col-md-8 datatable-filters">
+                <app-datatable-filters
+                    [page]="page"
+                    (onAddParam)="search.addParam($event)"
+                    (onRemoveParam)="search.removeParam($event)"
+                    (onRemoveParamOnly)="search.removeParamOnly($event)">
+                </app-datatable-filters>
+            </span>
+        </ng-container>
+
+    </ng-container>
+
+</div>
+
+<ng-container *ngIf="!isDisabled()">
+
+    <table class="table table-hover " [ngClass]="{ 'has-checkbox': page?.rowSelection }">
+        <thead>
+            <tr>
+
+                <ng-container *ngFor="let column of page?.columns">
+                    <th class="th-border" [ngClass]="setColumnSize(column.size)">
+
+                        <ng-container *ngIf="page?.rowSelection && page?.columns[0] === column">
+                            <span class="checkbox-column">
+                                <input
+                                    type="checkbox"
+                                    value="nome"
+                                    (change)="checkAllRows()"
+                                    [(ngModel)]="checkAllRowsField"
+                                >
+                            </span>
+                        </ng-container>
+
+                        <span
+                            [ngClass]="setAlignment(column.alignment)"
+                            title="{{ column.label }}">{{ column.label }}
+                        </span>
+                    </th>
+                </ng-container>
+                <ng-container *ngIf="page?.buttons.length">
+                    <th [ngClass]="setColumnSize(2)"></th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+
+            <ng-container *ngFor="let row of page?.rows">
+                <tr class="{{ highlightRow(row) }} table-bordered" [ngClass]="{active: checkRowSelection(row)}">
+
+                    <ng-container *ngFor="let column of page?.columns">
+                        <td [ngClass]="setColumnSize(column.size)"
+                            (click)="onRowClicked(row, $event)">
+
+                            <ng-container *ngIf="page?.rowSelection && page?.columns[0] === column">
+                                <span class="checkbox-column">
+                                    <input
+                                        type="checkbox"
+                                        value=""
+                                        [checked]="checkRowSelection(row)"
+                                    >
+                                </span>
+                            </ng-container>
+
+                            <span
+                                [title]="beforeRenderCellTitle(row, column)"
+                                [ngClass]="setAlignment(column.alignment)"
+                                [innerHTML]="beforeRenderCell(row, column)">
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container *ngIf="page?.buttons.length">
+                        <td [ngClass]="setColumnSize(2)">
+                            <ng-container *ngFor="let button of page?.rowButtons">
+                                <app-datatable-row-button
+                                    [button]="button"
+                                    [row]="row"
+                                    (onReaction)="onReact($event)"
+                                    (onPrompt)="onPromptReceived($event)"></app-datatable-row-button>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+
+                </tr>
+            </ng-container>
+
+            <ng-container *ngIf="!page?.rows.length">
+                <tr>
+                    <td [colSpan]="page && totalColSpan">
+                        <p class="empty-alert alert alert-warning text-center">
+                            {{ page?.emptyMessage.value | translate }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+
+    <app-datatable-pagination
+        style="padding: 20px;"
+        [page]="page"
+        (onNext)="setPage($event)"
+        (onPrev)="setPage($event)">
+    </app-datatable-pagination>
+
+    <app-component-resolver [options]="promptResolver"></app-component-resolver>
+
+</ng-container>
+
+<ng-container *ngIf="isDisabled()">
+
+    <p class="disabled-alert alert alert-{{ page.disabled.message.clazz }} text-center">
+        {{ page?.disabled.message.label.value | translate }}
+    </p>
+
+</ng-container>

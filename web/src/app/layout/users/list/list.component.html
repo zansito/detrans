@@ -1,0 +1,14 @@
+
+
+<div>
+  <button class="btn btn-md btn-secondary" (click)="onNew()" type="button">Novo</button>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div>
+      <app-datatable [options]="listOptions" class="accounts-datatable" (onReaction)="onReact($event)"></app-datatable>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<ng-container *ngIf="page?.filters.length">
+
+  <ng-container *ngFor="let filter of page?.filters">
+
+    <div class="navbar-collapse col-md-4 input-group d-inline-block datable-filters">
+      <nav id="menu">
+        <ul>
+        <li class="nav-item dropdown padding-li li-remove" ngbDropdown>
+          <a href="javascript:void(0)" ngbDropdownToggle>
+            <span>{{filter.label}}
+              <b class="caret"></b>
+            </span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+
+            <a (click)="onFilterOptionClicked(option, filter)" *ngFor="let option of filter.options" class="dropdown-item" href="javascript:void(0)">
+              <i> {{ option.label }}
+                <span *ngIf="checkSelectedFilterOption(option)" class="option-check">
+                  <i class="material-icons">check_circle</i>
+                </span>
+              </i>
+            </a>
+          </div>
+        </li>
+        </ul>
+      </nav>
+    </div>
+  </ng-container>

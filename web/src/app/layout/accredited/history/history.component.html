@@ -1,0 +1,19 @@
+<div>
+  <h2 class="text-muted">
+    <small>Detalhes do histórico</small>
+    <div class="pull-right">
+      <button class="btn btn-md btn-secondary" (click)="cancel()" type="button">Voltar</button>
+    </div>
+  </h2>
+  <hr>
+</div>
+
+<div class="row historr">
+  <div class="col-md-12">
+      <div>
+        <app-datatable
+         [options]="listOptions"
+         class="accounts-datatable" (onReaction)="onReact($event)"></app-datatable>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div>
+  <h2 class="text-muted">
+    <small>Detalhes do histórico</small>
+    <div class="pull-right">
+      <button class="btn btn-md btn-secondary" (click)="cancel()" type="button">Voltar</button>
+    </div>
+  </h2>
+  <hr>
+</div>
+<img src="assets/images/jlle.png" id="imgLogo" class="pull-right" width="200px" />
+
+<div *ngIf="currentAccredited"
+ class="jumbotron jumbotron-fluid tttt">
+  <div class="container">
+    <h5 class="display-6">Última alteração no usuário</h5>
+    <h5>
+      <b>{{ changedat  }}</b>
+    </h5>
+    <h5 class="display-6">Alterado por:</h5>
+    <h5>
+      <b>{{ userName }}</b>
+    </h5>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">
+    <div class="pull-right">Tipo de alteração: Edição</div>
+  </div>
+  <div class="card-body pds">
+    <h5 class="card-title"><b>Alterações</b></h5>
+    <div [innerHTML]="errvar"></div>
+
+  </div>
+</div>

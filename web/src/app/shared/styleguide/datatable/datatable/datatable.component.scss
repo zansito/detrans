@@ -1,0 +1,53 @@
+.header {
+
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #222;
+  border: 1px black;
+  border-radius: 3px;
+  margin-left: 0.1%;
+  margin-right: 0.1%;
+}
+
+// TABLE
+.table {
+  table-layout: fixed;
+
+  th, td { position: relative !important; border: 1px solid #eceeef; padding: 6px; }
+  th:before, td:before { content: ""; display: inline-block; }
+
+  $cell-padding: 8px;
+
+  td span, th span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+    &:not(.checkbox-column) {
+      left: $cell-padding; right: $cell-padding; /* same as cell padding */
+    }
+  }
+
+  &.has-checkbox {
+
+    $checkbox-size: 20px;
+
+    .checkbox-column { margin-left: $cell-padding; }
+
+    tr th, tr td {
+      &:first-child span:not(.checkbox-column) {
+
+        left: calc((#{$cell-padding} * 2) + #{$checkbox-size} + (#{$cell-padding} * 2));
+      }
+    }
+  }
+
+}
+
+.disabled-alert {
+  margin-top: 20px;
+}
+
+.datable-filters {
+  margin-top: 35px
+}

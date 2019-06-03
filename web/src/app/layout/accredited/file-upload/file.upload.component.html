@@ -1,0 +1,97 @@
+<div class="hero is-fullheight" [@routerTransition]>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-8 is-offset-2">
+          <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+            <p class="text-upload">
+              Arraste um arquivo aqui ou
+              <label class="upload-button">
+                <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> localize um em sua maquina
+              </label>
+              para upload.
+            </p>
+            <span class="icon-upload">
+              <i class="material-icons icon-upload">file_upload</i>
+            </span>
+          </div>
+        </div>
+        <div class="column is-8 is-offset-2">
+          <div class="upload-items">
+            <div class="upload-item" *ngFor="let f of files; let i = index;">
+              <span class="filename">
+                <span>{{ f.name }} ({{ f.id }}) - {{ f.progress?.data?.percentage }}%</span>
+                <span>uploading with {{ f.progress?.data?.speedHuman }}</span>
+                <span>ETA {{ f.progress?.data?.etaHuman }}</span>
+              </span>
+              <div class="progress">
+                <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngFor="let document of documents" class="disp-card">
+  <div class="container-fluid ct-class">
+    <div class="col-sm-12 disp-card">
+      <div class="card crop">
+        <img *ngIf="document.isPng === undefined" class="card-img-top crop-image" src="{{ linkUrl + document.fileName }}" alt="Card image cap">
+          <img *ngIf="document.isPng !== undefined" class="card-img-top crop-image" src="{{ document.isPng }}" alt="Card image cap">
+        <div class="card-block">
+          <span><hr class="line"></span>
+          <div class="card-text margin-btn">
+            <div class="margin-btn">
+              <strong>Data de upload:</strong> {{ document.uploadDate }}
+            </div>
+            <div class="margin-btn">
+              <strong> Upload por: </strong>{{ document.createdByName }}
+            </div>
+          </div>
+
+          <div class="card-btns">
+            <button type="button" (click)="download(document.fileName)" class="btn btn-outline-primary">Baixar</button>
+            <button type="button" (click)="open(content, document)" class="btn btn-outline-primary">Visualizar</button>
+            <button type="button" (click)="deleteModal(ctnt, document)" class="btn btn-outline-primary">Deletar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img class="img-resizer" src="{{ linkUrl + content.fileName }}">
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Fechar</button>
+  </div>
+</ng-template>
+
+<ng-template #ctnt let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Deseja deletar o documento?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-light" (click)="delete(ctnt); c('Close click')">Deletar</button>
+    <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Cancelar</button>
+  </div>
+</ng-template>
+

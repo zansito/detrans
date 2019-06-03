@@ -1,0 +1,10 @@
+ <div class="form-group datepickersize">
+        <div class="input-group">
+            <input class="form-control datealigner"
+                   placeholder="dd-mm-yyyy"
+                   name="date" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+            <button class="input-group-addon datealigner" (click)="d.toggle()" type="button">
+                <i class="material-icons">date_range</i>
+            </button>
+        </div>
+    </div>

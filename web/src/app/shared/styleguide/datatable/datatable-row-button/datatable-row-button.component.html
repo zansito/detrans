@@ -1,0 +1,11 @@
+<a class="btn btn-link {{ button.clazz }}"
+    data-toggle="tooltip"
+    data-placement="top"
+    [attr.data-original-title]="button.label"
+    [class.disabled]="disableButton(button)"
+    [hidden]="hideButton(button)"
+    [style.visibility]="visibilityButton(button)">
+    <i class="material-icons" [ngClass]="setButtonIcon(button)">
+        {{ button.label }}
+    </i>
+</a>

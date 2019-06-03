@@ -1,0 +1,20 @@
+<div class="loginBody">
+  <div class="login-page">
+    <img src="/assets/images/jlle.png" id="imgLogo" width="360px" class="user-avatar" />
+    <form [formGroup]="loginForm" (ngSubmit)="changePassword(f.value)">
+      <div class="form">
+        <p class="message">Insira sua nova senha
+
+        </p>
+        <input type="password" formControlName="password" class="form-control input-underline input-lg" placeholder="senha">
+
+
+        <p class="message">Confirme a senha</p>
+        <input type="password" formControlName="password" class="form-control input-underline input-lg" placeholder="senha">
+
+        <a class="btn rounded-btn" (click)="changePassword()">Enviar</a>
+
+      </div>
+    </form>
+  </div>
+</div>

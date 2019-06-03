@@ -1,0 +1,30 @@
+<div class="fluig-style-guide container-modal"
+    [ngStyle]="{'display': visible ? 'block' : 'none'}">
+
+    <div class="fluig-style-guide modal"
+        tabindex="-1"
+        (click)="onContainerClicked($event)"
+        [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+
+        <div class="modal-dialog {{ size ? 'modal-' + size : '' }}">
+            <div class="modal-content">
+                <div [hidden]="!hasHeader" class="modal-header" #header>
+                    <ng-container *ngIf="hasHeader">
+                        <button *ngIf="!hasFooter"
+                            type="button" class="close" (click)="this.hide()">
+                            <span>×</span>
+                        </button>
+                    </ng-container>
+                    <ng-content select=".app-modal-header"></ng-content>
+                </div>
+                <div [hidden]="!hasBody" class="modal-body" #body>
+                    <ng-content select=".app-modal-body"></ng-content>
+                </div>
+                <div [hidden]="!hasFooter" class="modal-footer" #footer>
+                    <ng-content select=".app-modal-footer"></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
